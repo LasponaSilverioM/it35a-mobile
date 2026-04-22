@@ -4,6 +4,7 @@ const Search: React.FC = () => {
    return(
     <IonPage>
         <IonHeader>
+            
             <IonToolbar>
                 <IonButtons>
                     <IonMenuButton>
