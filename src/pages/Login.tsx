@@ -1,4 +1,7 @@
-import { IonButton, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, IonButtons, useIonRouter } from "@ionic/react";
+import { IonButton, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, IonButtons, useIonRouter, IonIcon } from "@ionic/react";
+import { logoGoogle, options } from "ionicons/icons";
+import { Redirect } from "react-router";
+import { supabase } from '../lib/supabaseClient'
 
 const Login: React.FC = () => {
  const navigation = useIonRouter();
@@ -6,7 +9,19 @@ const Login: React.FC = () => {
       const doLogin = () => {
     navigation.push('/app', 'forward', 'replace')
  }
-   return(
+
+
+ const signInWithGoogle = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+            redirectTo: `${window.location.origin}/app`
+        }
+    })
+
+    
+ }
+ return(
     <IonPage>
         <IonHeader>
             <IonToolbar>
@@ -14,8 +29,9 @@ const Login: React.FC = () => {
          </IonToolbar>
         </IonHeader>
          <IonContent fullscreen >
-            <IonButton expand= "full" onClick={() => doLogin ()}>
-                Login
+            <IonButton onClick={signInWithGoogle} expand= "full" fill="outline" shape= "round">
+                <IonIcon icon = {logoGoogle}/>
+                Continue via Google
             </IonButton>
             </IonContent>
     </IonPage>
