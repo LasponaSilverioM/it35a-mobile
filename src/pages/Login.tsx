@@ -18,6 +18,8 @@ const Login: React.FC = () => {
             redirectTo: `${window.location.origin}/app`
         }
     })
+
+    
  }
  return(
     <IonPage>
